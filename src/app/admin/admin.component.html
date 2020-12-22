@@ -1,0 +1,136 @@
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{itemDetailList.primaryItem}}</h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCloseHandled()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img class="card-img-top" src=" {{itemDetailList.primaryItemImage}}" />
+      </div>
+      <div>
+        <h4 class="text-center">
+          <a target="_blank" href="{{itemDetailList.imgUrlPrimary}}"
+            >Click Here To Visit Product Details</a
+          >
+        </h4>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-default"
+          (click)="onCloseHandled()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />
+
+<div class="row">
+  <div class="col-sm-3" *ngFor="let card of cardsList">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title text-center text-success">{{card.name}}</h5>
+
+        <img
+          class="card-img-top"
+          src="../../assets/gift.jpg"
+          alt="Card image cap"
+          (click)="openModal(card)"
+        />
+
+        <p class="card-text text-center" id="{{card.primaryItem}}">
+          {{card.primaryItem}}
+        </p>
+
+        <p class="card-text text-center" id="{{card.battle}}">
+          Battle Chances : <span class="text-danger">{{ card.battle}}</span>
+        </p>
+        <div class="row">
+          <div class="col-sm-6" *ngIf="card.item2">
+            <div class="card">
+              <div class="card-img-top">
+                <img
+                  class="card-img-top"
+                  src="../../assets/gift.jpg"
+                  alt="Card image cap"
+                  (click)="openModalItem2(card)"
+                />
+                <p class="text-center">{{card.item2}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6" *ngIf="card.item3">
+            <div class="card">
+              <div class="card-img-top">
+                <img
+                  class="card-img-top"
+                  src="../../assets/gift.jpg"
+                  alt="Card image cap"
+                  (click)="openModalItem3(card)"
+                />
+                <p class="text-center">{{card.item3}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+  </div>
+
+  <!-- <div class="col-md-3 lg-3 sm-4 pr-3" *ngFor="let card of cardsList">
+    <div class="card" style="width: 18rem;">
+      <div class="top-left">{{card.name}}</div>
+
+      <img
+        class="card-img-top"
+        src="../../assets/gift.jpg"
+        alt="Card image cap"
+        (click)="openModal(card)"
+      />
+
+      <div class="card-body">
+        <h5 class="card-title text-center" id="{{card.primaryItem}}">
+          {{card.primaryItem}}
+        </h5>
+        <p class="card-text text-center">
+          <span id="{{card.battle}}">Battle Chances :{{card.battle}}</span>
+        </p>
+      </div>
+
+      <div class="row">
+        <div class="col-6" *ngIf="card.item2">
+          <img
+            class="card-img-top"
+            src="../../assets/gift.jpg"
+            alt="Card image cap"
+            (click)="openModalItem2(card)"
+          />
+          <p class="text-center">{{card.item2}}</p>
+        </div>
+        <div class="col-6" *ngIf="card.item3">
+          <img
+            class="card-img-top"
+            src="../../assets/gift.jpg"
+            alt="Card image cap"
+            (click)="openModalItem3(card)"
+          />
+          <p class="text-center">{{card.item3}}</p>
+        </div>
+      </div>
+    </div>
+    <br />
+  </div> -->
+</div>

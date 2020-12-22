@@ -1,0 +1,222 @@
+<!-- Modal Battle-->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  [ngClass]="{'show':showModal}"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Battle</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="showModalClick()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="battle" (ngSubmit)="battleResult()">
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-5">
+                <select
+                  (change)="onChange($event)"
+                  class="form-control form-control-sm"
+                  formControlName="allies"
+                >
+                  <option *ngFor="let user of userList" value="{{user.id}}"
+                    >{{user.name}}</option
+                  >
+                </select>
+              </div>
+              <div class="col-2">
+                VS
+              </div>
+              <div class="col-5">
+                <select
+                  class="form-control form-control-sm"
+                  formControlName="enemy"
+                >
+                  <option *ngFor="let user of userList" value="{{user.id}}"
+                    >{{user.name}}</option
+                  >
+                </select>
+              </div>
+            </div>
+            <br />
+            <h5 class="text-center">Winner</h5>
+            <div class="row">
+              <div class="col text-center">
+                <select
+                  class="form-control form-control-sm"
+                  formControlName="winner"
+                  required
+                >
+                  <option *ngFor="let user of userList" value="{{user.id}}"
+                    >{{user.name}}</option
+                  >
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+            (click)="showModalClick()"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--Modal Exchange-->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  [ngClass]="{'show':showModalExchange}"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Exchange</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="showModalClickExchange()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="exchanging" (ngSubmit)="exchange()">
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-5">
+                <select
+                  class="form-control form-control-sm"
+                  formControlName="from"
+                >
+                  <option *ngFor="let user of userList" value="{{user.id}}"
+                    >{{user.name}}</option
+                  >
+                </select>
+              </div>
+              <div class="col-2 text-center">
+                Between
+              </div>
+              <div class="col-5">
+                <select
+                  class="form-control form-control-sm"
+                  formControlName="to"
+                >
+                  <option *ngFor="let user of userList" value="{{user.id}}"
+                    >{{user.name}}</option
+                  >
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+            (click)="showModalClickExchange()"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">Save Exchange</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">UnicomGame</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li *ngIf="isAdmin" class="nav-item">
+        <a class="nav-link" routerLink="/newuser">Register</a>
+      </li>
+      <li *ngIf="isAdmin" class="nav-item">
+        <a class="nav-link" routerLink="/admin" (click)="addItems($event)"
+          >Start</a
+        >
+      </li>
+      <li *ngIf="isAdmin" class="nav-item">
+        <a class="nav-link" routerLink="" (click)="finishEvent($event)"
+          >Finish</a
+        >
+      </li>
+      <li *ngIf="isAdmin" class="nav-item">
+        <a
+          class="nav-link"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          (click)="showModalClick()"
+          >Battle</a
+        >
+      </li>
+
+      <li *ngIf="isAdmin" class="nav-item">
+        <a
+          class="nav-link"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          (click)="showModalClickExchange()"
+          >Exchange</a
+        >
+      </li>
+
+      <li *ngIf="isAdmin" class="nav-item">
+        <a class="nav-link" routerLink="/admin">Admin </a>
+      </li>
+
+      <li *ngIf="!userNameLoggedIn" class="nav-item">
+        <a class="nav-link" routerLink="/login">Login </a>
+      </li>
+
+      <li *ngIf="userNameLoggedIn" class="nav-item">
+        <a class="nav-link" routerLink="/login" (click)="logoutUser()"
+          >Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

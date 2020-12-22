@@ -1,0 +1,35 @@
+<div *ngIf="isAdmin" class="container">
+  <h3>Add New User</h3>
+  <form [formGroup]="newUser" (ngSubmit)="newUserCollection()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" formControlName="name" />
+    </div>
+    <div class="form-group">
+      <label for="pass">Password</label>
+      <input type="password" class="form-control" formControlName="pass" />
+    </div>
+    <div class="pt-2">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>
+<br />
+
+<div *ngIf="isAdmin" class="container">
+  <h3>Add New Item</h3>
+  <form [formGroup]="newItem" (ngSubmit)="newItemCollection()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" formControlName="name" />
+    </div>
+    <div class="form-group">
+      <label for="url">url</label>
+      <input type="text" class="form-control" formControlName="url" />
+    </div>
+    <div class="pt-2">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>
+<br />
